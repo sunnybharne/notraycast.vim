@@ -8,12 +8,14 @@ intentionally directional rather than a promise of dates or exact features.
 - [x] Create a loadable Neovim plugin.
 - [x] Add a first user command and public Lua function.
 - [x] Add automated smoke testing and project documentation.
+- [x] Add a minimal Telescope picker for Firefox history.
 
 ## Exploration — next
 
-- [ ] Define the first real workflow and user experience.
-- [ ] Add a configurable command or action registry.
-- [ ] Prototype a searchable command surface.
+- [x] Define Firefox history search as the first experimental workflow.
+- [ ] Read current history safely while Firefox is open.
+- [ ] Explore bookmarks and other deliberately chosen sources.
+- [ ] Decide whether a general action registry is actually needed.
 - [ ] Establish configuration and extension APIs.
 
 ## Productization — later

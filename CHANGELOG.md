@@ -7,9 +7,18 @@ and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-28
+
 ### Added
 
-- A public roadmap for the next stages of the plugin.
+- `:NotRaycastHistory`, a Telescope picker for local Firefox history.
+- Fuzzy searching across page titles and URLs.
+- Opening the selected result in the default browser.
+- Project rules that favor simple, direct code and local-only history access.
+
+### Removed
+
+- The initial `:NotRaycastHello` placeholder command.
 
 ## [0.1.0] - 2026-08-28
 
@@ -21,5 +30,6 @@ and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Smoke-test coverage and GitHub Actions CI.
 - Project documentation and GitHub Pages website.
 
-[Unreleased]: https://github.com/sunnybharne/notraycast.vim/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/sunnybharne/notraycast.vim/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/sunnybharne/notraycast.vim/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/sunnybharne/notraycast.vim/releases/tag/v0.1.0

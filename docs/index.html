@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="notraycast.vim is a tiny, Lua-native Neovim plugin with one cheerful command and plenty of room to grow."
+      content="Search local Firefox history from Neovim with a small Telescope picker."
     />
     <meta name="theme-color" content="#f3f1e8" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="notraycast.vim — small command, big plans" />
+    <meta property="og:title" content="notraycast.vim — Firefox history in Telescope" />
     <meta
       property="og:description"
-      content="A tiny, Lua-native Neovim plugin with one cheerful command and plenty of room to grow."
+      content="Search local Firefox history from Neovim with a small Telescope picker."
     />
     <meta
       property="og:url"
@@ -23,10 +23,10 @@
       content="https://sunnybharne.github.io/notraycast.vim/og.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="notraycast.vim — small command, big plans" />
+    <meta name="twitter:title" content="notraycast.vim — Firefox history in Telescope" />
     <meta
       name="twitter:description"
-      content="A tiny, Lua-native Neovim plugin with one cheerful command and plenty of room to grow."
+      content="Search local Firefox history from Neovim with a small Telescope picker."
     />
     <meta
       name="twitter:image"
@@ -34,7 +34,7 @@
     />
     <link rel="canonical" href="https://sunnybharne.github.io/notraycast.vim/" />
     <link rel="stylesheet" href="./styles.css" />
-    <title>notraycast.vim — small command, big plans</title>
+    <title>notraycast.vim — Firefox history in Telescope</title>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -66,11 +66,11 @@
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> v0.1.0 · early preview</p>
-            <h1 id="hero-title">A small command.<br /><span>Big plans.</span></h1>
+            <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> v0.2.0 · early preview</p>
+            <h1 id="hero-title">Firefox history.<br /><span>In Telescope.</span></h1>
             <p class="hero-lede">
-              <strong>notraycast.vim</strong> is a tiny, Lua-native Neovim plugin.
-              Today it says hello. Tomorrow, we build what comes next.
+              <strong>notraycast.vim</strong> lets you fuzzy-search local Firefox
+              history without leaving Neovim.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#install">Install the plugin <span aria-hidden="true">↓</span></a>
@@ -90,11 +90,11 @@
               </div>
               <div>
                 <dt>0</dt>
-                <dd>dependencies</dd>
+                <dd>history uploads</dd>
               </div>
               <div>
                 <dt>100%</dt>
-                <dd>Lua</dd>
+                <dd>local</dd>
               </div>
             </dl>
           </div>
@@ -112,19 +112,19 @@
               <div class="terminal-body" aria-hidden="true">
                 <p><span class="line-number">1</span><span class="syntax-purple">local</span> future = <span class="syntax-green">require</span>(<span class="syntax-yellow">"notraycast"</span>)</p>
                 <p><span class="line-number">2</span></p>
-                <p><span class="line-number">3</span><span class="comment">-- start with something small</span></p>
-                <p><span class="line-number">4</span><span class="syntax-purple">vim</span>.cmd(<span class="syntax-yellow">"NotRaycastHello"</span>)</p>
+                <p><span class="line-number">3</span><span class="comment">-- search Firefox history</span></p>
+                <p><span class="line-number">4</span>future.<span class="syntax-green">history</span>()</p>
                 <span class="cursor-block"></span>
               </div>
               <div class="notification">
                 <span class="notification-icon" aria-hidden="true">✓</span>
                 <div>
                   <strong>notraycast.vim</strong>
-                  <p>Hello, world!</p>
+                  <p>Firefox history → Telescope</p>
                 </div>
               </div>
             </div>
-            <p class="terminal-caption"><span aria-hidden="true">↳</span> Yes, that really is the whole feature. For now.</p>
+            <p class="terminal-caption"><span aria-hidden="true">↳</span> Titles and URLs stay on your machine.</p>
           </div>
         </div>
       </section>
@@ -133,11 +133,10 @@
         <div class="container">
           <div class="section-heading">
             <p class="section-number">01 / OVERVIEW</p>
-            <h2 id="overview-title">A clean foundation,<br />ready for ideas.</h2>
+            <h2 id="overview-title">One source.<br />One picker.</h2>
             <p>
-              The first release keeps things deliberately simple: a conventional
-              plugin layout, one Lua module, and one Neovim command. That makes it
-              easy to understand today and easy to evolve tomorrow.
+              The plugin reads Firefox's local history database, gives the results
+              to Telescope, and opens the selected URL. Nothing more.
             </p>
           </div>
 
@@ -145,22 +144,22 @@
             <article class="feature-card feature-card-dark">
               <span class="feature-index">A</span>
               <div>
-                <h3>Native Neovim command</h3>
-                <p>Run <code>:NotRaycastHello</code> from command mode and get an instant notification.</p>
+                <h3>Telescope-native search</h3>
+                <p>Run <code>:NotRaycastHistory</code> and fuzzy-search page titles and URLs.</p>
               </div>
             </article>
             <article class="feature-card">
               <span class="feature-index">B</span>
               <div>
-                <h3>Lua from the start</h3>
-                <p>A small, readable module with no compatibility layer and no runtime dependencies.</p>
+                <h3>Local by design</h3>
+                <p>History goes directly from Firefox's SQLite database to Telescope.</p>
               </div>
             </article>
             <article class="feature-card feature-card-accent">
               <span class="feature-index">C</span>
               <div>
-                <h3>Built in public</h3>
-                <p>The roadmap, issues, releases, and source stay visible as the product takes shape.</p>
+                <h3>Simple on purpose</h3>
+                <p>One direct Lua module, one command, and no custom interface.</p>
               </div>
             </article>
           </div>
@@ -171,10 +170,10 @@
         <div class="container install-grid">
           <div class="install-copy">
             <p class="section-number">02 / INSTALL</p>
-            <h2 id="install-title">Hello in under<br />a minute.</h2>
+            <h2 id="install-title">Search in under<br />a minute.</h2>
             <p>
-              Add the plugin to your <code>lazy.nvim</code> setup, restart Neovim,
-              and run the command. Neovim 0.8 or newer is recommended.
+              Add the plugin to <code>lazy.nvim</code>, close Firefox so its history
+              database can be read safely, and run the command. Neovim 0.10 or newer is required.
             </p>
             <ol class="steps-list">
               <li>
@@ -183,11 +182,11 @@
               </li>
               <li>
                 <span>2</span>
-                <div><strong>Sync or restart</strong><small>Let lazy.nvim download the repository.</small></div>
+                <div><strong>Sync and close Firefox</strong><small>Let lazy.nvim install it, then release Firefox's history database.</small></div>
               </li>
               <li>
                 <span>3</span>
-                <div><strong>Say hello</strong><small>Run <code>:NotRaycastHello</code>.</small></div>
+                <div><strong>Search history</strong><small>Run <code>:NotRaycastHistory</code>.</small></div>
               </li>
             </ol>
           </div>
@@ -210,16 +209,20 @@
             <pre id="install-code" tabindex="0"><code><span class="code-muted">-- Your lazy.nvim plugin spec</span>
 {
   <span class="code-string">"sunnybharne/notraycast.vim"</span>,
-  cmd = <span class="code-string">"NotRaycastHello"</span>,
+  dependencies = {
+    <span class="code-string">"nvim-lua/plenary.nvim"</span>,
+    <span class="code-string">"nvim-telescope/telescope.nvim"</span>,
+  },
+  cmd = <span class="code-string">"NotRaycastHistory"</span>,
 }</code></pre>
             <div class="command-row">
               <span class="command-prompt" aria-hidden="true">:</span>
-              <code id="command-code">NotRaycastHello</code>
+              <code id="command-code">NotRaycastHistory</code>
               <button
                 class="copy-button copy-command"
                 type="button"
                 data-copy-target="command-code"
-                aria-label="Copy NotRaycastHello command"
+                aria-label="Copy NotRaycastHistory command"
               >
                 Copy command
               </button>
@@ -246,12 +249,13 @@
                 <span class="roadmap-state"><i aria-hidden="true"></i> SHIPPED</span>
               </div>
               <div class="roadmap-content">
-                <h3>Make the foundation real</h3>
-                <p>Establish the plugin structure, public repository, documentation, releases, and a working command.</p>
+                <h3>Search Firefox history</h3>
+                <p>Prove the core idea with one local data source and Telescope's familiar picker.</p>
                 <ul>
                   <li>Lua module and plugin entrypoint</li>
-                  <li><code>:NotRaycastHello</code> command</li>
-                  <li>Public docs and project roadmap</li>
+                  <li><code>:NotRaycastHistory</code> command</li>
+                  <li>Fuzzy title and URL search</li>
+                  <li>Open the selected page</li>
                 </ul>
               </div>
               <span class="roadmap-count">01</span>
@@ -263,8 +267,8 @@
                 <span class="roadmap-state roadmap-state-open"><i aria-hidden="true"></i> EXPLORING</span>
               </div>
               <div class="roadmap-content">
-                <h3>Define the first useful workflow</h3>
-                <p>Turn early ideas and real Neovim pain points into a focused first feature—small enough to polish properly.</p>
+                <h3>Work while Firefox is open</h3>
+                <p>Find a safe, simple way to read current history without requiring Firefox to be closed.</p>
                 <a
                   href="https://github.com/sunnybharne/notraycast.vim/issues"
                   target="_blank"
@@ -320,18 +324,18 @@
               <div class="release-header">
                 <div>
                   <span class="release-tag">LATEST</span>
-                  <h3>v0.1.0</h3>
+                  <h3>v0.2.0</h3>
                 </div>
                 <time datetime="2026-08-28">August 28, 2026</time>
               </div>
-              <p class="release-name">Hello, world!</p>
+              <p class="release-name">Firefox history search</p>
               <ul class="change-list">
-                <li><span>Added</span> the <code>:NotRaycastHello</code> command.</li>
-                <li><span>Added</span> a Lua module with a native Neovim notification.</li>
-                <li><span>Added</span> installation docs, a public roadmap, and project foundations.</li>
+                <li><span>Added</span> the <code>:NotRaycastHistory</code> command.</li>
+                <li><span>Added</span> fuzzy searching across local page titles and URLs.</li>
+                <li><span>Added</span> Enter-to-open behavior using the default browser.</li>
               </ul>
               <a
-                href="https://github.com/sunnybharne/notraycast.vim/releases/tag/v0.1.0"
+                href="https://github.com/sunnybharne/notraycast.vim/releases/tag/v0.2.0"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -347,7 +351,7 @@
                 </div>
                 <span>Next</span>
               </div>
-              <p>Nothing to announce yet. Watch the repository to follow the next experiment as it happens.</p>
+              <p>Next: safely read current history while Firefox remains open.</p>
             </article>
           </div>
         </div>
@@ -395,7 +399,7 @@
           <a href="https://github.com/sunnybharne/notraycast.vim/issues" target="_blank" rel="noreferrer">Issues</a>
           <a href="https://github.com/sunnybharne/notraycast.vim/releases" target="_blank" rel="noreferrer">Releases</a>
         </div>
-        <p class="footer-meta">v0.1.0 · <span id="copyright-year">2026</span></p>
+        <p class="footer-meta">v0.2.0 · <span id="copyright-year">2026</span></p>
       </div>
     </footer>
 

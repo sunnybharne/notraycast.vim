@@ -4,8 +4,8 @@ end
 
 vim.g.loaded_notraycast = true
 
-vim.api.nvim_create_user_command("NotRaycastHello", function()
-  require("notraycast").hello()
+vim.api.nvim_create_user_command("NotRaycastHistory", function()
+  require("notraycast").history()
 end, {
-  desc = "Show the notraycast.vim hello-world message",
+  desc = "Search Firefox history with Telescope",
 })
