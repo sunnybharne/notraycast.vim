@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="notraycast.vim is a tiny, Lua-native Neovim plugin with one cheerful command and plenty of room to grow."
+    />
+    <meta name="theme-color" content="#f3f1e8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="notraycast.vim — small command, big plans" />
+    <meta
+      property="og:description"
+      content="A tiny, Lua-native Neovim plugin with one cheerful command and plenty of room to grow."
+    />
+    <meta
+      property="og:url"
+      content="https://sunnybharne.github.io/notraycast.vim/"
+    />
+    <meta
+      property="og:image"
+      content="https://sunnybharne.github.io/notraycast.vim/og.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="notraycast.vim — small command, big plans" />
+    <meta
+      name="twitter:description"
+      content="A tiny, Lua-native Neovim plugin with one cheerful command and plenty of room to grow."
+    />
+    <meta
+      name="twitter:image"
+      content="https://sunnybharne.github.io/notraycast.vim/og.png"
+    />
+    <link rel="canonical" href="https://sunnybharne.github.io/notraycast.vim/" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>notraycast.vim — small command, big plans</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container nav-shell">
+        <a class="brand" href="#top" aria-label="notraycast.vim home">
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span>notraycast.vim</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="#overview">Overview</a>
+          <a href="#install">Install</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#changelog">Changelog</a>
+        </nav>
+        <a
+          class="nav-github"
+          href="https://github.com/sunnybharne/notraycast.vim"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> v0.1.0 · early preview</p>
+            <h1 id="hero-title">A small command.<br /><span>Big plans.</span></h1>
+            <p class="hero-lede">
+              <strong>notraycast.vim</strong> is a tiny, Lua-native Neovim plugin.
+              Today it says hello. Tomorrow, we build what comes next.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#install">Install the plugin <span aria-hidden="true">↓</span></a>
+              <a
+                class="button button-secondary"
+                href="https://github.com/sunnybharne/notraycast.vim"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View source <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <dl class="hero-facts" aria-label="Project facts">
+              <div>
+                <dt>01</dt>
+                <dd>command</dd>
+              </div>
+              <div>
+                <dt>0</dt>
+                <dd>dependencies</dd>
+              </div>
+              <div>
+                <dt>100%</dt>
+                <dd>Lua</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="terminal-wrap" aria-label="Example of notraycast.vim running in Neovim">
+            <div class="terminal-shadow" aria-hidden="true"></div>
+            <div class="terminal-card">
+              <div class="terminal-bar">
+                <div class="terminal-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <span>nvim · notraycast.lua</span>
+                <span class="terminal-mode">NORMAL</span>
+              </div>
+              <div class="terminal-body" aria-hidden="true">
+                <p><span class="line-number">1</span><span class="syntax-purple">local</span> future = <span class="syntax-green">require</span>(<span class="syntax-yellow">"notraycast"</span>)</p>
+                <p><span class="line-number">2</span></p>
+                <p><span class="line-number">3</span><span class="comment">-- start with something small</span></p>
+                <p><span class="line-number">4</span><span class="syntax-purple">vim</span>.cmd(<span class="syntax-yellow">"NotRaycastHello"</span>)</p>
+                <span class="cursor-block"></span>
+              </div>
+              <div class="notification">
+                <span class="notification-icon" aria-hidden="true">✓</span>
+                <div>
+                  <strong>notraycast.vim</strong>
+                  <p>Hello, world!</p>
+                </div>
+              </div>
+            </div>
+            <p class="terminal-caption"><span aria-hidden="true">↳</span> Yes, that really is the whole feature. For now.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-overview" id="overview" aria-labelledby="overview-title">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-number">01 / OVERVIEW</p>
+            <h2 id="overview-title">A clean foundation,<br />ready for ideas.</h2>
+            <p>
+              The first release keeps things deliberately simple: a conventional
+              plugin layout, one Lua module, and one Neovim command. That makes it
+              easy to understand today and easy to evolve tomorrow.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card feature-card-dark">
+              <span class="feature-index">A</span>
+              <div>
+                <h3>Native Neovim command</h3>
+                <p>Run <code>:NotRaycastHello</code> from command mode and get an instant notification.</p>
+              </div>
+            </article>
+            <article class="feature-card">
+              <span class="feature-index">B</span>
+              <div>
+                <h3>Lua from the start</h3>
+                <p>A small, readable module with no compatibility layer and no runtime dependencies.</p>
+              </div>
+            </article>
+            <article class="feature-card feature-card-accent">
+              <span class="feature-index">C</span>
+              <div>
+                <h3>Built in public</h3>
+                <p>The roadmap, issues, releases, and source stay visible as the product takes shape.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-install" id="install" aria-labelledby="install-title">
+        <div class="container install-grid">
+          <div class="install-copy">
+            <p class="section-number">02 / INSTALL</p>
+            <h2 id="install-title">Hello in under<br />a minute.</h2>
+            <p>
+              Add the plugin to your <code>lazy.nvim</code> setup, restart Neovim,
+              and run the command. Neovim 0.8 or newer is recommended.
+            </p>
+            <ol class="steps-list">
+              <li>
+                <span>1</span>
+                <div><strong>Add the spec</strong><small>Place it with your other lazy.nvim plugins.</small></div>
+              </li>
+              <li>
+                <span>2</span>
+                <div><strong>Sync or restart</strong><small>Let lazy.nvim download the repository.</small></div>
+              </li>
+              <li>
+                <span>3</span>
+                <div><strong>Say hello</strong><small>Run <code>:NotRaycastHello</code>.</small></div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <div>
+                <span class="code-label">lazy.nvim</span>
+                <span class="code-file">lua/plugins/notraycast.lua</span>
+              </div>
+              <button
+                class="copy-button"
+                type="button"
+                data-copy-target="install-code"
+                aria-label="Copy lazy.nvim installation snippet"
+              >
+                <span aria-hidden="true">□</span> Copy
+              </button>
+            </div>
+            <pre id="install-code" tabindex="0"><code><span class="code-muted">-- Your lazy.nvim plugin spec</span>
+{
+  <span class="code-string">"sunnybharne/notraycast.vim"</span>,
+  cmd = <span class="code-string">"NotRaycastHello"</span>,
+}</code></pre>
+            <div class="command-row">
+              <span class="command-prompt" aria-hidden="true">:</span>
+              <code id="command-code">NotRaycastHello</code>
+              <button
+                class="copy-button copy-command"
+                type="button"
+                data-copy-target="command-code"
+                aria-label="Copy NotRaycastHello command"
+              >
+                Copy command
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-roadmap" id="roadmap" aria-labelledby="roadmap-title">
+        <div class="container">
+          <div class="section-heading roadmap-heading">
+            <p class="section-number">03 / ROADMAP</p>
+            <h2 id="roadmap-title">Built one honest<br />step at a time.</h2>
+            <p>
+              The direction will sharpen as the plugin grows. These are intentions,
+              not promises—discussion and experiments come before complexity.
+            </p>
+          </div>
+
+          <div class="roadmap-list">
+            <article class="roadmap-item is-current">
+              <div class="roadmap-meta">
+                <span class="roadmap-stage">NOW</span>
+                <span class="roadmap-state"><i aria-hidden="true"></i> SHIPPED</span>
+              </div>
+              <div class="roadmap-content">
+                <h3>Make the foundation real</h3>
+                <p>Establish the plugin structure, public repository, documentation, releases, and a working command.</p>
+                <ul>
+                  <li>Lua module and plugin entrypoint</li>
+                  <li><code>:NotRaycastHello</code> command</li>
+                  <li>Public docs and project roadmap</li>
+                </ul>
+              </div>
+              <span class="roadmap-count">01</span>
+            </article>
+
+            <article class="roadmap-item">
+              <div class="roadmap-meta">
+                <span class="roadmap-stage">NEXT</span>
+                <span class="roadmap-state roadmap-state-open"><i aria-hidden="true"></i> EXPLORING</span>
+              </div>
+              <div class="roadmap-content">
+                <h3>Define the first useful workflow</h3>
+                <p>Turn early ideas and real Neovim pain points into a focused first feature—small enough to polish properly.</p>
+                <a
+                  href="https://github.com/sunnybharne/notraycast.vim/issues"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Join the discussion <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+              <span class="roadmap-count">02</span>
+            </article>
+
+            <article class="roadmap-item">
+              <div class="roadmap-meta">
+                <span class="roadmap-stage">LATER</span>
+                <span class="roadmap-state roadmap-state-open"><i aria-hidden="true"></i> OPEN</span>
+              </div>
+              <div class="roadmap-content">
+                <h3>Grow around what works</h3>
+                <p>Add configuration, integrations, and deeper workflows only after the core interaction proves itself useful.</p>
+              </div>
+              <span class="roadmap-count">03</span>
+            </article>
+          </div>
+
+          <p class="roadmap-note">
+            Follow the live work on the
+            <a href="https://github.com/users/sunnybharne/projects" target="_blank" rel="noreferrer">GitHub project board <span aria-hidden="true">↗</span></a>
+          </p>
+        </div>
+      </section>
+
+      <section class="section section-changelog" id="changelog" aria-labelledby="changelog-title">
+        <div class="container changelog-grid">
+          <div class="changelog-intro">
+            <p class="section-number">04 / CHANGELOG</p>
+            <h2 id="changelog-title">Every change,<br />out in the open.</h2>
+            <p>
+              Releases follow semantic versioning. While the project is below 1.0,
+              expect fast learning and occasional breaking changes.
+            </p>
+            <a
+              class="text-link"
+              href="https://github.com/sunnybharne/notraycast.vim/releases"
+              target="_blank"
+              rel="noreferrer"
+            >
+              All GitHub releases <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <div class="release-list">
+            <article class="release release-latest">
+              <div class="release-header">
+                <div>
+                  <span class="release-tag">LATEST</span>
+                  <h3>v0.1.0</h3>
+                </div>
+                <time datetime="2026-08-28">August 28, 2026</time>
+              </div>
+              <p class="release-name">Hello, world!</p>
+              <ul class="change-list">
+                <li><span>Added</span> the <code>:NotRaycastHello</code> command.</li>
+                <li><span>Added</span> a Lua module with a native Neovim notification.</li>
+                <li><span>Added</span> installation docs, a public roadmap, and project foundations.</li>
+              </ul>
+              <a
+                href="https://github.com/sunnybharne/notraycast.vim/releases/tag/v0.1.0"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Read the release notes <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+
+            <article class="release release-unreleased">
+              <div class="release-header">
+                <div>
+                  <span class="release-tag release-tag-muted">IN PROGRESS</span>
+                  <h3>Unreleased</h3>
+                </div>
+                <span>Next</span>
+              </div>
+              <p>Nothing to announce yet. Watch the repository to follow the next experiment as it happens.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-cta" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-card">
+            <p class="cta-kicker">THE BEGINNING, NOT THE PITCH.</p>
+            <h2 id="cta-title">See where this goes.</h2>
+            <p>Star the repository, open an idea, or simply check back after the next release.</p>
+            <div class="hero-actions cta-actions">
+              <a
+                class="button button-light"
+                href="https://github.com/sunnybharne/notraycast.vim"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Star on GitHub <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                class="button button-outline-light"
+                href="https://github.com/sunnybharne/notraycast.vim/issues/new"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Share an idea
+              </a>
+            </div>
+            <span class="cta-decoration" aria-hidden="true">:)</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <a class="brand" href="#top" aria-label="Back to the top">
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span>notraycast.vim</span>
+        </a>
+        <p>Made slowly, in public, for Neovim.</p>
+        <div class="footer-links">
+          <a href="https://github.com/sunnybharne/notraycast.vim" target="_blank" rel="noreferrer">Source</a>
+          <a href="https://github.com/sunnybharne/notraycast.vim/issues" target="_blank" rel="noreferrer">Issues</a>
+          <a href="https://github.com/sunnybharne/notraycast.vim/releases" target="_blank" rel="noreferrer">Releases</a>
+        </div>
+        <p class="footer-meta">v0.1.0 · <span id="copyright-year">2026</span></p>
+      </div>
+    </footer>
+
+    <div class="copy-status" role="status" aria-live="polite"></div>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
