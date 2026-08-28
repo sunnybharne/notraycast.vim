@@ -2,40 +2,37 @@ vim.opt.runtimepath:append(vim.fn.getcwd())
 vim.cmd("runtime plugin/notraycast.lua")
 
 assert(
-  vim.fn.exists(":NotRaycastHistory") == 2,
-  ":NotRaycastHistory was not registered"
+  vim.fn.exists(":NotRaycastSearch") == 2,
+  ":NotRaycastSearch was not registered"
 )
 
-local database = vim.fn.tempname() .. ".sqlite"
-local schema = [[
-  CREATE TABLE moz_places (
-    title TEXT,
-    url TEXT,
-    hidden INTEGER,
-    visit_count INTEGER,
-    frecency INTEGER,
-    last_visit_date INTEGER
-  );
-  INSERT INTO moz_places VALUES (
-    'Example page', 'https://example.com', 0, 1, 100, 1
-  );
+local html = [[
+  <a rel="nofollow"
+     href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fexample.com%2Fyellow%2Dduck&amp;rut=test"
+     class='result-link'>Yellow &amp; Duck</a>
+  <a rel="nofollow"
+     href="//duckduckgo.com/l/?uddg=javascript%3Aalert%281%29&amp;rut=test"
+     class='result-link'>Unsafe result</a>
 ]]
 
-vim.fn.system({ "sqlite3", database, schema })
-assert(vim.v.shell_error == 0, "could not create the test history database")
-
-vim.g.notraycast_firefox_history_file = database
 local notraycast = require("notraycast")
-local history = notraycast.load_history()
+local results = notraycast.parse_results(html)
 
-assert(#history == 1, "expected one history entry")
-assert(history[1].label == "Example page", "unexpected history label")
-assert(history[1].url == "https://example.com", "unexpected history URL")
+assert(#results == 1, "expected one search result")
+assert(results[1].title == "Yellow & Duck", "unexpected result title")
+assert(results[1].url == "https://example.com/yellow-duck", "unexpected result URL")
+assert(#notraycast.parse_results("") == 0, "empty HTML should return no results")
 
-vim.fn.system({ "sqlite3", database, "DELETE FROM moz_places;" })
-assert(#notraycast.load_history() == 0, "empty history should return an empty list")
+vim.fn.system({ "true" })
+local system = vim.fn.system
+vim.fn.system = function()
+  return '<form id="challenge-form">verification required</form>'
+end
 
-vim.g.notraycast_firefox_history_file = nil
-vim.fn.delete(database)
+local ok, message = pcall(notraycast.search, "yellow duck")
+vim.fn.system = system
+
+assert(not ok, "verification page should fail")
+assert(message:find("human verification", 1, true), "unexpected verification error")
 
 print("notraycast.vim smoke test passed")

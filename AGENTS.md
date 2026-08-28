@@ -3,7 +3,7 @@
 ## Product direction
 
 - Build a keyboard-first search tool for Neovim using Telescope.
-- Firefox history search is the first experiment, not the final product shape.
+- DuckDuckGo web search is the current experiment.
 - Use Telescope for searching and selection. Do not build a separate UI.
 
 ## Code style
@@ -18,4 +18,5 @@
 ## Project upkeep
 
 - Keep the README, changelog, release notes, roadmap, and website aligned with shipped behavior.
-- Never collect, upload, or transmit browser history. Read it locally only.
+- Keep search-provider behavior and network requirements explicit.
+- Do not add browser-history access unless the user asks for it again.

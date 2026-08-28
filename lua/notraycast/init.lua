@@ -1,75 +1,88 @@
 local M = {}
 
-local history_query = [[
-  SELECT COALESCE(NULLIF(title, ''), url) AS label, url
-  FROM moz_places
-  WHERE hidden = 0
-    AND visit_count > 0
-    AND (url LIKE 'https://%' OR url LIKE 'http://%')
-  ORDER BY frecency DESC, last_visit_date DESC
-  LIMIT 2000;
-]]
+local search_url = "https://lite.duckduckgo.com/lite/"
+local user_agent = "Lynx/2.9.2 libwww-FM/2.14 SSL-MM/1.4.1"
 
 local function notify(message)
   vim.notify(message, vim.log.levels.ERROR, { title = "notraycast.vim" })
 end
 
-local function firefox_history_file()
-  local configured_file = vim.g.notraycast_firefox_history_file
-
-  if configured_file and configured_file ~= "" then
-    return vim.fn.expand(configured_file)
-  end
-
-  local pattern = "~/Library/Application Support/Firefox/Profiles/*/places.sqlite"
-  local files = vim.fn.glob(pattern, false, true)
-
-  table.sort(files, function(left, right)
-    return vim.fn.getftime(left) > vim.fn.getftime(right)
-  end)
-
-  return files[1]
+local function decode_html(text)
+  return text
+    :gsub("<.->", "")
+    :gsub("&quot;", '"')
+    :gsub("&#x27;", "'")
+    :gsub("&#39;", "'")
+    :gsub("&lt;", "<")
+    :gsub("&gt;", ">")
+    :gsub("&amp;", "&")
 end
 
-function M.load_history()
-  local history_file = firefox_history_file()
+function M.parse_results(html)
+  local results = {}
+  local pattern = '<a[^>]-href="([^"]-)"[^>]-class=\'result%-link\'[^>]*>(.-)</a>'
 
-  if not history_file then
-    error("Firefox history was not found", 0)
+  for href, title in html:gmatch(pattern) do
+    local target = href:match("[?&]uddg=([^&]+)")
+
+    if target then
+      local url = vim.uri_decode(target)
+
+      if url:match("^https?://") then
+        table.insert(results, {
+          title = decode_html(title),
+          url = url,
+        })
+      end
+    end
   end
 
-  if vim.fn.executable("sqlite3") == 0 then
-    error("sqlite3 is required", 0)
+  return results
+end
+
+function M.search(query)
+  if vim.fn.executable("curl") == 0 then
+    error("curl is required", 0)
   end
 
   local output = vim.fn.system({
-    "sqlite3",
-    "-readonly",
-    "-json",
-    history_file,
-    history_query,
+    "curl",
+    "-fsSL",
+    "--max-time",
+    "10",
+    "-A",
+    user_agent,
+    "--get",
+    "--data-urlencode",
+    "q=" .. query,
+    search_url,
   })
 
   if vim.v.shell_error ~= 0 then
-    if output:lower():find("locked", 1, true) then
-      error("Firefox history is busy; close Firefox and retry", 0)
-    end
-
-    error("Firefox history could not be read", 0)
+    error("DuckDuckGo search failed", 0)
   end
 
-  if output:match("^%s*$") then
-    return {}
+  if
+    output:find("challenge-form", 1, true)
+    or output:find("anomaly-modal", 1, true)
+    or output:find("Unfortunately, bots use DuckDuckGo too", 1, true)
+  then
+    error("DuckDuckGo requires human verification; try again later", 0)
   end
 
-  return vim.fn.json_decode(output)
+  return M.parse_results(output)
 end
 
-function M.history()
-  local ok, items = pcall(M.load_history)
+local function show_results(query)
+  local ok, results = pcall(M.search, query)
 
   if not ok then
-    notify(items)
+    notify(results)
+    return
+  end
+
+  if #results == 0 then
+    notify("DuckDuckGo returned no results")
     return
   end
 
@@ -80,14 +93,14 @@ function M.history()
   local sorter = require("telescope.config").values.generic_sorter
 
   pickers.new({}, {
-    prompt_title = "Firefox history",
+    prompt_title = "Results: " .. query,
     finder = finders.new_table({
-      results = items,
-      entry_maker = function(item)
+      results = results,
+      entry_maker = function(result)
         return {
-          value = item,
-          display = item.label .. "  " .. item.url,
-          ordinal = item.label .. " " .. item.url,
+          value = result,
+          display = result.title .. "  " .. result.url,
+          ordinal = result.title .. " " .. result.url,
         }
       end,
     }),
@@ -99,6 +112,32 @@ function M.history()
 
         if selected then
           vim.ui.open(selected.value.url)
+        end
+      end)
+
+      return true
+    end,
+  }):find()
+end
+
+function M.web()
+  local pickers = require("telescope.pickers")
+  local finders = require("telescope.finders")
+  local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
+  local sorter = require("telescope.config").values.generic_sorter
+
+  pickers.new({}, {
+    prompt_title = "Search DuckDuckGo (press Enter)",
+    finder = finders.new_table({ results = {} }),
+    sorter = sorter({}),
+    attach_mappings = function(prompt_buffer)
+      actions.select_default:replace(function()
+        local query = vim.trim(action_state.get_current_line())
+
+        if query ~= "" then
+          actions.close(prompt_buffer)
+          show_results(query)
         end
       end)
 

@@ -7,6 +7,19 @@ and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-08-28
+
+### Added
+
+- `:NotRaycastSearch`, a two-step Telescope web-search flow.
+- Keyless DuckDuckGo Lite searches using `curl`.
+- Top result titles and links with Enter-to-open behavior.
+
+### Removed
+
+- Firefox history access and its `sqlite3` dependency.
+- `:NotRaycastHistory`.
+
 ## [0.2.0] - 2026-08-28
 
 ### Added
@@ -30,6 +43,7 @@ and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Smoke-test coverage and GitHub Actions CI.
 - Project documentation and GitHub Pages website.
 
-[Unreleased]: https://github.com/sunnybharne/notraycast.vim/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/sunnybharne/notraycast.vim/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/sunnybharne/notraycast.vim/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/sunnybharne/notraycast.vim/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/sunnybharne/notraycast.vim/releases/tag/v0.1.0

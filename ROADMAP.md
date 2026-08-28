@@ -8,13 +8,14 @@ intentionally directional rather than a promise of dates or exact features.
 - [x] Create a loadable Neovim plugin.
 - [x] Add a first user command and public Lua function.
 - [x] Add automated smoke testing and project documentation.
-- [x] Add a minimal Telescope picker for Firefox history.
+- [x] Try Firefox history search and remove it when its locking constraint was unsuitable.
+- [x] Add a keyless DuckDuckGo web-search picker.
 
 ## Exploration — next
 
-- [x] Define Firefox history search as the first experimental workflow.
-- [ ] Read current history safely while Firefox is open.
-- [ ] Explore bookmarks and other deliberately chosen sources.
+- [x] Search the web through a Telescope-first workflow.
+- [ ] Improve result formatting only when real usage requires it.
+- [ ] Explore additional deliberately chosen sources.
 - [ ] Decide whether a general action registry is actually needed.
 - [ ] Establish configuration and extension APIs.
 

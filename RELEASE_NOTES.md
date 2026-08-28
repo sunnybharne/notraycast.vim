@@ -1,5 +1,15 @@
 # Release notes
 
+## v0.3.0 — DuckDuckGo web search
+
+Released on August 28, 2026.
+
+Run `:NotRaycastSearch`, type a query, and press Enter. A second Telescope
+picker shows the top DuckDuckGo links. Press Enter on a result to open it.
+
+This version removes all Firefox history functionality. It uses DuckDuckGo's
+keyless Lite search page and requires only `curl`, Telescope, and Plenary.
+
 ## v0.2.0 — Firefox history search
 
 Released on August 28, 2026.

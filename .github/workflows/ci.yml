@@ -23,3 +23,15 @@ jobs:
 
       - name: Run smoke test
         run: nvim --headless -u NONE -l scripts/smoke-test.lua
+
+      - name: Install UI test dependencies
+        run: |
+          git clone --depth 1 https://github.com/nvim-lua/plenary.nvim.git .dependencies/plenary.nvim
+          git clone --depth 1 https://github.com/nvim-telescope/telescope.nvim.git .dependencies/telescope.nvim
+
+      - name: Run UI test
+        run: >-
+          nvim --headless -u NONE
+          --cmd "set runtimepath+=${GITHUB_WORKSPACE}/.dependencies/plenary.nvim"
+          --cmd "set runtimepath+=${GITHUB_WORKSPACE}/.dependencies/telescope.nvim"
+          -l scripts/ui-test.lua
