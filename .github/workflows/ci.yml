@@ -18,6 +18,7 @@ jobs:
       - name: Install stable Neovim
         uses: rhysd/action-setup-vim@v1
         with:
+          neovim: true
           version: stable
 
       - name: Run smoke test
