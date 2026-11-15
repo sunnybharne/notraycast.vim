@@ -73,6 +73,22 @@ function M.search(query)
   return M.parse_results(output)
 end
 
+local function picker(title, finder, on_select)
+  local actions = require("telescope.actions")
+  local state = require("telescope.actions.state")
+  require("telescope.pickers").new({}, {
+    prompt_title = title,
+    finder = require("telescope.finders").new_table(finder),
+    sorter = require("telescope.config").values.generic_sorter({}),
+    attach_mappings = function(buf)
+      actions.select_default:replace(function()
+        on_select(buf, actions, state)
+      end)
+      return true
+    end,
+  }):find()
+end
+
 local function show_results(query)
   local ok, results = pcall(M.search, query)
 
@@ -86,64 +102,32 @@ local function show_results(query)
     return
   end
 
-  local pickers = require("telescope.pickers")
-  local finders = require("telescope.finders")
-  local actions = require("telescope.actions")
-  local action_state = require("telescope.actions.state")
-  local sorter = require("telescope.config").values.generic_sorter
-
-  pickers.new({}, {
-    prompt_title = "Results: " .. query,
-    finder = finders.new_table({
-      results = results,
-      entry_maker = function(result)
-        return {
-          value = result,
-          display = result.title .. "  " .. result.url,
-          ordinal = result.title .. " " .. result.url,
-        }
-      end,
-    }),
-    sorter = sorter({}),
-    attach_mappings = function(prompt_buffer)
-      actions.select_default:replace(function()
-        local selected = action_state.get_selected_entry()
-        actions.close(prompt_buffer)
-
-        if selected then
-          vim.ui.open(selected.value.url)
-        end
-      end)
-
-      return true
+  picker("Results: " .. query, {
+    results = results,
+    entry_maker = function(result)
+      return {
+        value = result,
+        display = result.title .. "  " .. result.url,
+        ordinal = result.title .. " " .. result.url,
+      }
     end,
-  }):find()
+  }, function(buf, actions, state)
+    local selected = state.get_selected_entry()
+    actions.close(buf)
+    if selected then
+      vim.ui.open(selected.value.url)
+    end
+  end)
 end
 
 function M.web()
-  local pickers = require("telescope.pickers")
-  local finders = require("telescope.finders")
-  local actions = require("telescope.actions")
-  local action_state = require("telescope.actions.state")
-  local sorter = require("telescope.config").values.generic_sorter
-
-  pickers.new({}, {
-    prompt_title = "Search DuckDuckGo (press Enter)",
-    finder = finders.new_table({ results = {} }),
-    sorter = sorter({}),
-    attach_mappings = function(prompt_buffer)
-      actions.select_default:replace(function()
-        local query = vim.trim(action_state.get_current_line())
-
-        if query ~= "" then
-          actions.close(prompt_buffer)
-          show_results(query)
-        end
-      end)
-
-      return true
-    end,
-  }):find()
+  picker("Search DuckDuckGo (press Enter)", { results = {} }, function(buf, actions, state)
+    local query = vim.trim(state.get_current_line())
+    if query ~= "" then
+      actions.close(buf)
+      show_results(query)
+    end
+  end)
 end
 
 return M
