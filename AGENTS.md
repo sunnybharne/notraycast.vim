@@ -1,22 +1,6 @@
-# notraycast.vim development rules
+# Repository instructions
 
-## Product direction
-
-- Build a keyboard-first search tool for Neovim using Telescope.
-- DuckDuckGo web search is the current experiment.
-- Use Telescope for searching and selection. Do not build a separate UI.
-
-## Code style
-
-- Prefer the smallest working implementation.
-- Keep the Lua direct, readable, and easy to change.
-- Use short functions with plain names.
-- Add abstractions, options, dependencies, and compatibility layers only when a current feature needs them.
-- Add one useful behavior at a time and test the real workflow.
-- Do not add code or documentation merely to make the project look sophisticated.
-
-## Project upkeep
-
-- Keep the README, changelog, release notes, roadmap, and website aligned with shipped behavior.
-- Keep search-provider behavior and network requirements explicit.
-- Do not add browser-history access unless the user asks for it again.
+- Use simple code and plain words. Cut filler, repetition, and stock AI phrases.
+- Keep only what is needed today. Reuse existing files and remove duplicates.
+- Keep each Terraform component in one `main.tf` with its JSON inputs. Keep modules and deployment tools out of those folders.
+- Work on `main`. Test and push without asking. Never create feature branches.
